@@ -7,10 +7,24 @@
 #SBATCH --mem=64G
 #SBATCH --array=1-22
 
-QCTOOL=/home/u036/u036-genomicc/shared/workspace/roskamsh/bin
-PATH=$PATH:$HOME/.local/bin:$HOME/bin:$BIN:$QCTOOL
+export PATH=$PATH:/home/u036/u036/shared/bin
 
-INPUTDIR=/home/u036/u036-genomicc/shared/workspace/roskamsh/data/wgs-genomicc-imputed/bgen
-OUTPUTDIR=snpstats/genomicc-wgs
+## Options for wgs
+# BGENDIR /home/u036/u036-genomicc/shared/workspace/roskamsh/data/wgs-genomicc-imputed/bgen
+# COHORT wgs-genomicc
+# PREFIX wgs-genomicc-chr
 
-qctool -g ${INPUTDIR}/wgs-genomicc-chr${SLURM_ARRAY_TASK_ID}.bgen -s ${INPUTDIR}/wgs-genomicc-chr${SLURM_ARRAY_TASK_ID}.sample -snp-stats -osnp ${OUTPUTDIR}/chr${SLURM_ARRAY_TASK_ID}.snpstats
+## Options for genotype-array
+# BGENDIR /home/u036/u036-genomicc/shared/workspace/roskamsh/data/genomicc-genotype-array/imputed/genomic-isaric 
+# COHORT genomicc-genotype-array
+# PREFIX GenOMICC_ISARIC_chr 
+
+BGENDIR=$1
+COHORT=$2
+PREFIX=$3
+OUTPUTDIR=snpstats/${COHORT}
+
+# Make output directory
+mkdir -p snpstats/${COHORT}
+
+qctool_v2.2.0 -g ${BGENDIR}/${PREFIX}${SLURM_ARRAY_TASK_ID}.bgen -s ${BGENDIR}/${PREFIX}${SLURM_ARRAY_TASK_ID}.sample -snp-stats -osnp ${OUTPUTDIR}/chr${SLURM_ARRAY_TASK_ID}.snpstats

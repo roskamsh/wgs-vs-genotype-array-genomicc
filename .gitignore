@@ -1,0 +1,5 @@
+logs/*
+non-genotyped-snps/*
+snpstats/*
+GRCh38/*
+cleanedids.csv

@@ -2,4 +2,5 @@ logs/*
 non-genotyped-snps/*
 snpstats/*
 GRCh38/*
+data/*
 cleanedids.csv

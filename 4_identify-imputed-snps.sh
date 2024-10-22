@@ -4,7 +4,7 @@
 #SBATCH --error=logs/findimputed.%A.%a.err
 #SBATCH --time=1:00:00
 #SBATCH --ntasks=1
-#SBATCH --mem=20G
+#SBATCH --mem=30G
 #SBATCH --array=1-22
 
 export PATH=$PATH:/home/u036/u036/shared/bin
